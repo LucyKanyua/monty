@@ -1,6 +1,9 @@
 #include "monty.h"
+#include <string.h>
 
 char *_value;
+
+void process_opcode(stack_t **stack, char *opcode, unsigned int line_number);
 
 /**
  * main - main entry point
@@ -28,7 +31,7 @@ int main(int argc, char **argv)
 	}
 	while ((s = fgets(buffer, sizeof(buffer), fp)))
 	{
-		str = strdup(s);
+		str = s;
 		token = strtok(str, delim);
 		_value = strtok(NULL, delim);
 
@@ -40,39 +43,42 @@ int main(int argc, char **argv)
 		free(str);
 	}
 	fclose(fp);
-	free_stack(stack);
+	free(stack);
 	return (0);
 }
+
 /**
  * process_opcode - analyses the inputed code and passes it to right handler
  * @stack: pointer to stack
  * @opcode: the opcode
- *@line_number: the line with the instruction
+ * @line_number: the line with the instruction
  * Return: void
  */
 void process_opcode(stack_t **stack, char *opcode, unsigned int line_number)
+{
 	int len, fnd = 0, i = 0;
 
 	instruction_t stack_ops[] = {
 		{"push", opcode_push},
 		{"pall", opcode_pall},
 		{"pint", opcode_pint},
-		{"pop", opcode_pop},
+		{"pop", opcode_pop}
 	};
 
-len = sizeof(stack_ops) / sizeof(instruction_t);
-while (i < len)
-{
-	if (strcmp(opcode, stack_ops[i].opcode) == 0)
+	len = sizeof(stack_ops) / sizeof(instruction_t);
+	while (i < len)
 	{
-		fnd = 1;
-		stack_ops[i].f(stack, line_number);
-		break;
+		if (strcmp(opcode, stack_ops[i].opcode) == 0)
+		{
+			fnd = 1;
+			stack_ops[i].f(stack, line_number);
+			break;
+		}
+		i++;
 	}
-	i++;
-}
-if (!fnd)
-{
-	fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcode);
-	exit(EXIT_FAILURE);
+	if (!fnd)
+	{
+		fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcode);
+		exit(EXIT_FAILURE);
+	}
 }

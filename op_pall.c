@@ -12,6 +12,8 @@ void opcode_pall(stack_t **stack, unsigned int line_number)
 {
 	stack_t *_current = *stack;
 
+	printf("Line number: %u\n", line_number);
+
 	while (_current != NULL)
 	{
 		printf("%d\n", _current->n);

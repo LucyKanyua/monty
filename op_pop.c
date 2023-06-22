@@ -9,7 +9,7 @@
 
 void opcode_pop(stack_t **stack, unsigned int line_number)
 {
-	stack_t _current;
+	stack_t *_current;
 
 	if (*stack == NULL)
 	{
@@ -21,5 +21,5 @@ void opcode_pop(stack_t **stack, unsigned int line_number)
 
 	if (*stack != NULL)
 		(*stack)->prev = NULL;
-	free(temp);
+	free(_current);
 }
