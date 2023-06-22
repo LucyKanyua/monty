@@ -1,5 +1,7 @@
 #include "monty.h"
 
+unsigned int stack_node = 1;
+
 /**
  * opcode_push - opcode push pushes an element to the stack
  * @stack: pointer to the stack
