@@ -65,6 +65,7 @@ void process_opcode(stack_t **stack, char *opcode, unsigned int line_number)
 		{"swap", opcode_swap},
 		{"stack", opcode_stack},
 		{"nop", opcode_nop},
+		{"add", opcode_add},
 	};
 
 	len = sizeof(stack_ops) / sizeof(instruction_t);
