@@ -1,9 +1,8 @@
 #include "monty.h"
 #include <string.h>
 
-char *_value;
-
 void process_opcode(stack_t **stack, char *opcode, unsigned int line_number);
+char *_value;
 
 /**
  * main - main entry point

@@ -3,7 +3,7 @@
 /**
  * opcode_stack - adds all new elements to the top of the stack
  * @stack: pointer to the top of the stack
- * @line_number
+ * @line_number: origin of the instruction
  * Return: void
  */
 void opcode_stack(stack_t **stack, unsigned int line_number)
